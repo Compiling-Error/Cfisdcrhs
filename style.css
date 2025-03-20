@@ -1,0 +1,98 @@
+/* Set the background color and make sure everything takes up full screen */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Container that holds both the rotating boxes and the login form */
+.container {
+    position: relative;
+    text-align: center;
+}
+
+/* Style for the rotating boxes */
+.boxes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    height: 80vh;
+    pointer-events: none;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    border: 3px solid transparent;
+    animation: rotateBox 10s infinite linear;
+}
+
+#box1 {
+    border-color: red;
+}
+
+#box2 {
+    border-color: green;
+}
+
+#box3 {
+    border-color: blue;
+}
+
+@keyframes rotateBox {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Style for the login form */
+.login-form {
+    z-index: 10;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+}
+
+.login-form h2 {
+    color: white;
+}
+
+.login-form input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+}
+
+.login-form button {
+    padding: 10px 20px;
+    width: 220px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #555;
+}
