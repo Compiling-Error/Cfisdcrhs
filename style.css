@@ -100,6 +100,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     font-size: 16px;
+    flex-direction: column;
 }
 
 /* Style the login button */
@@ -111,6 +112,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    flex-direction: column;
 }
 
 .login-form button:hover {
