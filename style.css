@@ -83,7 +83,8 @@ body {
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
-    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-form h2 {
@@ -102,7 +103,8 @@ body {
     color: white;
     font-size: 16px;
     flex-direction: column;
-    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Style the login button */
@@ -115,7 +117,8 @@ body {
     border-radius: 5px;
     cursor: pointer;
     flex-direction: column;
-    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-form button:hover {
