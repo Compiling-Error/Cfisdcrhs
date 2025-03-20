@@ -42,19 +42,26 @@ body {
     position: absolute;
 }
 
+/* Different colors and rotation speeds for each box */
 #box1 {
     border-color: red;
     animation-duration: 8s;
+    top: -50px; /* Adjust position to overlap with the other boxes */
+    left: -50px;
 }
 
 #box2 {
     border-color: green;
     animation-duration: 12s;
+    top: 0;
+    left: 0;
 }
 
 #box3 {
     border-color: blue;
     animation-duration: 15s;
+    top: 50px;
+    left: 50px;
 }
 
 @keyframes rotateBox {
@@ -69,20 +76,23 @@ body {
 /* Style for the login form */
 .login-form {
     z-index: 10;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-form h2 {
     color: white;
+    margin-bottom: 20px;
 }
 
+/* Style the login input fields */
 .login-form input {
     margin: 10px 0;
     padding: 10px;
@@ -94,6 +104,7 @@ body {
     font-size: 16px;
 }
 
+/* Style the login button */
 .login-form button {
     padding: 10px 20px;
     width: 220px;
