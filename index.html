@@ -1,25 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Login with Spinning Boxes</title>
+  <style>
+    /* Reset defaults */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #111;
+    }
+    /* Centering container with flex */
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Spinning boxes in the background */
+    .box {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 2px solid;
+      border-radius: 10px;
+      /* Two animations: spin and color change */
+      animation: spin 10s linear infinite, colorchange 5s linear infinite;
+    }
+    /* Offset animations so boxes start at different positions */
+    .box:nth-child(1) {
+      animation-delay: 0s, 0s;
+    }
+    .box:nth-child(2) {
+      animation-delay: -3.33s, -1.66s;
+    }
+    .box:nth-child(3) {
+      animation-delay: -6.66s, -3.33s;
+    }
+    /* Keyframes for rotation */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    /* Keyframes for border-color changes */
+    @keyframes colorchange {
+      0% { border-color: red; }
+      33% { border-color: blue; }
+      66% { border-color: green; }
+      100% { border-color: red; }
+    }
+    /* Login form container */
+    .login-container {
+      position: relative;
+      background: rgba(255,255,255,0.9);
+      padding: 20px 30px;
+      border-radius: 8px;
+      z-index: 10; /* Make sure it stays above the boxes */
+      min-width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .login-container button:hover {
+      background: #555;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="boxes">
-            <div class="box" id="box1"></div>
-            <div class="box" id="box2"></div>
-            <div class="box" id="box3"></div>
-        </div>
-        <div class="login-form">
-            <h2>Login</h2>
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <button type="submit">Submit</button>
+  <div class="wrapper">
+    <!-- Three animated boxes behind the form -->
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+    <!-- Centered login form -->
+    <div class="login-container">
+      <h2>Login</h2>
+      <form>
+        <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Sign In</button>
+      </form>
     </div>
-    </div>
-    <script src="script.js"></script>
+  </div>
 </body>
 </html>
