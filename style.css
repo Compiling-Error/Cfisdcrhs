@@ -1,4 +1,4 @@
-/* Set the background and use flexbox on the body to center everything */
+/* Set the background and use flexbox on the body to center the container */
 body {
     margin: 0;
     padding: 0;
@@ -10,42 +10,42 @@ body {
     align-items: center;
 }
 
-/* Container now acts as a flex container to center its children */
+/* The container that holds both the boxes and the login form */
 .container {
     position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 0; /* Establish stacking context */
+    z-index: 0; /* Creates a stacking context */
 }
 
-/* Boxes container remains absolutely positioned but is centered by flex rules */
+/* The boxes container, absolutely positioned relative to .container */
 .boxes {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
+    transform: translate(-50%, -50%);
     pointer-events: none;
-    z-index: -1; /* Keep behind the login prompt */
+    z-index: -1; /* Ensures boxes remain behind the login prompt */
 }
 
-/* Each box is now centered inside the .boxes container */
+/* Each box is centered within the boxes container */
 .box {
     width: 150px;
     height: 150px;
     border: 3px solid transparent;
-    animation: rotateBox 10s infinite linear;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    animation: rotateBox 10s infinite linear;
 }
 
-/* Remove any additional offsets to keep boxes aligned perfectly */
+/* Specific styling for each box to provide color and different rotation speeds */
 #box1 {
     border-color: red;
     animation-duration: 8s;
@@ -61,6 +61,7 @@ body {
     animation-duration: 15s;
 }
 
+/* Adjust the keyframes to include the centering transform */
 @keyframes rotateBox {
     0% {
         transform: translate(-50%, -50%) rotate(0deg);
@@ -70,16 +71,16 @@ body {
     }
 }
 
-/* Login form stays centered thanks to the .container flex settings */
+/* The login form is centered by the .container flexbox settings */
 .login-form {
-    z-index: 10;
     position: relative;
+    z-index: 10; /* Sits above the boxes */
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Align form elements in a column */
     justify-content: center;
     align-items: center;
 }
