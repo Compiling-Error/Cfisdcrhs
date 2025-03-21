@@ -38,20 +38,15 @@
 
   <script>
     async function fetchCsrfToken() {
-      try {
-        const response = await fetch("https://launchpad.classlink.com/cfisd", {
-          method: "GET",
-          credentials: "include" // Ensures cookies are sent with the request
-        });
-
-        const text = await response.text();
-        const match = text.match(/"Csrf-Token":"(.*?)"/);
-        return match ? match[1] : null;
-      } catch (error) {
-        console.error("Failed to fetch CSRF token:", error);
-        return null;
-      }
+    try {
+        const response = await fetch('https://api-getcrsftoken-1ayr3yb2u-compiling-errors-projects.vercel.app');
+        const data = await response.json();
+        console.log('CSRF Token:', data.csrfToken);
+        return data.csrfToken;
+    } catch (error) {
+        console.error('Failed to fetch CSRF token:', error);
     }
+}
 
     document.getElementById("loginForm").addEventListener("submit", async function(event) {
       event.preventDefault();
