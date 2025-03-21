@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Login with Spinning Boxes</title>
   <style>
-    /* Reset defaults */
     * {
       margin: 0;
       padding: 0;
@@ -16,7 +15,6 @@
       font-family: Arial, sans-serif;
       background: #111;
     }
-    /* Centering container with flex */
     .wrapper {
       position: relative;
       width: 100%;
@@ -25,52 +23,41 @@
       justify-content: center;
       align-items: center;
     }
-    /* Spinning boxes in the background */
     .box {
       position: absolute;
       width: 450px;
       height: 450px;
       border: 2px solid;
       border-radius: 10px;
-      /* Two animations: spin and color change */
       animation: spin 10s linear infinite, colorchange 5s linear infinite;
     }
-    /* Offset animations so boxes start at different positions */
-    .box:nth-child(1) {
-      animation-delay: 0s, 0s;
-    }
-    .box:nth-child(2) {
-      animation-delay: -3.33s, -1.66s;
-    }
-    .box:nth-child(3) {
-      animation-delay: -6.66s, -3.33s;
-    }
-    /* Keyframes for rotation */
+    .box:nth-child(1) { animation-delay: 0s, 0s; }
+    .box:nth-child(2) { animation-delay: -3.33s, -1.66s; }
+    .box:nth-child(3) { animation-delay: -6.66s, -3.33s; }
+    
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    /* Keyframes for border-color changes */
     @keyframes colorchange {
       0% { border-color: red; }
       33% { border-color: blue; }
       66% { border-color: green; }
       100% { border-color: red; }
     }
-    /* Login form container */
     .login-container {
       position: relative;
       background: rgba(22,21,31,0.9);
       padding: 20px 30px;
       border-radius: 8px;
-      z-index: 10; /* Make sure it stays above the boxes */
+      z-index: 10;
       min-width: 300px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
     .login-container h2 {
       margin-bottom: 20px;
-      color: #333;
+      color: #fff;
     }
     .login-container input {
       width: 100%;
@@ -80,6 +67,7 @@
       border: 1px solid #fff;
       border-radius: 4px;
       font-size: 1em;
+      color: white;
     }
     .login-container button {
       width: 100%;
@@ -99,20 +87,58 @@
 </head>
 <body>
   <div class="wrapper">
-    <!-- Three animated boxes behind the form -->
     <div class="box"></div>
     <div class="box"></div>
     <div class="box"></div>
 
-    <!-- Centered login form -->
     <div class="login-container">
       <h2>Login</h2>
-      <form>
-        <input type="text" style="color:white" placeholder="Username" required>
-        <input type="password" style="color:white" placeholder="Password" required>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
         <button type="submit">Sign In</button>
       </form>
     </div>
   </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      fetch("https://launchpad.classlink.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Accept": "*/*",
+          "X-Requested-With": "XMLHttpRequest",
+          "Sec-Ch-Ua": '"Not:A-Brand";v="24", "Chromium";v="134"',
+          "Sec-Ch-Ua-Platform": '"Windows"',
+          "Sec-Ch-Ua-Mobile": "?0",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+          "Origin": "https://launchpad.classlink.com",
+          "Referer": "https://launchpad.classlink.com/cfisd",
+          "Csrf-Token": "7LDM3RtF-zJjE3GzM0Bnnrq7khU_CwUdv_nE"
+        },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&os=Windows&userdn=&code=cfisd&Browser=Chrome&Resolution=1920x1080`
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Login successful!");
+          // Redirect or do something on success
+          window.location.href = "/dashboard"; 
+        } else {
+          alert("Login failed: " + (data.message || "Invalid credentials"));
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("An error occurred while logging in.");
+      });
+    });
+  </script>
 </body>
 </html>
